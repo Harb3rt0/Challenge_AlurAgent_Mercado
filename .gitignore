@@ -1,0 +1,42 @@
+# Entorno virtual local
+.venv/
+venv/
+ENV/
+env/
+
+# Credenciales y configuracion local
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Base de datos vectorial
+database/
+
+# Archivos compilados de Python y cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+
+# Archivos especificos del Sistema Operativo
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Editores y carpetas de configuracion del IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
