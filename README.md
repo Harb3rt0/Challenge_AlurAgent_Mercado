@@ -68,6 +68,10 @@ flowchart TD
    - Interfaz Web (`app.py`): Desarrollada con Streamlit, ofrece un historial de chat dinámico, una barra lateral personalizada con el listado de archivos cargados en el sistema y una interfaz de usuario optimizada.
    - Interfaz de Consola (`main.py`): Permite la interacción directa con el agente desde la terminal.
 
+## Evidencia de Deploy en la Nube
+
+[deploy.webm](https://github.com/user-attachments/assets/5686c023-f2f8-4932-a853-90dd3e470dfe)
+
 ## Tecnologías y Herramientas Utilizadas
 
 - Lenguaje de Programación: Python 3.10+
