@@ -1,7 +1,5 @@
 # Asistente Virtual Mercado - Sistema Agente RAG
 
-## Descripción General del Proyecto
-
 El proyecto Asistente Virtual Mercado es una solución basada en Inteligencia Artificial diseñada para optimizar la consulta y gestión de información operativa de un supermercado (Mercado Central 24h). El sistema permite interactuar en lenguaje natural para obtener respuestas precisas sobre inventarios, precios y stock de productos, así como sobre normativas de la empresa, reglamentos internos, manuales de proveedores y políticas de atención al cliente.
 
 La solución integra capacidades de generación aumentada por recuperación (RAG, por sus siglas en inglés) y herramientas de análisis de datos estructurados en tiempo real. Además, ofrece dos entornos de interacción: una interfaz gráfica interactiva construida en Streamlit y un ejecutor por consola para pruebas directas en línea de comandos.
@@ -63,6 +61,7 @@ flowchart TD
    - Definido en `src/agent/agent_core.py`, utiliza `create_tool_calling_agent` y `AgentExecutor` de LangChain.
    - Recibe la consulta del usuario y decide dinámicamente si debe ejecutar una búsqueda vectorial, una consulta de tabla o responder de forma directa.
    - Implementa la función `extraer_texto_respuesta` para procesar y sanear la salida del LLM, descartando metadatos técnicos (como bloques JSON con atributos `extras` o `index`) y entregando únicamente la respuesta en texto plano conversacional.
+   - Implementa la función `formatear_mensaje_error` para interceptar excepciones (tales como errores de cuota 429 de la API de Gemini, fallos de autenticación o desconexión) y presentar mensajes informativos amigables y concisos sin volcar JSONs técnicos.
    - Implementa una regla estricta de control de alucinaciones: si la información requerida no está presente en los documentos o la hoja de cálculo, el agente responde textualmente: "Lo siento, de momento no cuento con esa información en mi base de conocimiento."
 
 4. Capa de Presentación:

@@ -41,3 +41,26 @@ def extraer_texto_respuesta(salida):
     if isinstance(salida, dict) and "text" in salida:
         return salida["text"]
     return str(salida)
+
+def formatear_mensaje_error(e: Exception) -> str:
+    msg = str(e)
+    
+    if "429" in msg or "RESOURCE_EXHAUSTED" in msg or "Quota exceeded" in msg:
+        return "Se ha alcanzado el límite de cuota de la API de Gemini (Error 429). Por favor, espera unos momentos antes de realizar otra pregunta."
+    
+    if "API_KEY_INVALID" in msg or "API key not found" in msg or "UNAUTHENTICATED" in msg:
+        return "Error de autenticación con la API de Gemini. Por favor, verifica que la clave GEMINI_API_KEY esté configurada correctamente."
+        
+    if "ConnectionError" in msg or "TIMEOUT" in msg or "Unavailable" in msg:
+        return "No se pudo establecer conexión con el servicio de Inteligencia Artificial. Por favor, verifica tu conexión a internet e intenta de nuevo."
+
+    lineas = msg.splitlines()
+    if lineas:
+        primera_linea = lineas[0].strip()
+        if "{" in primera_linea:
+            primera_linea = primera_linea.split("{")[0].strip()
+        if primera_linea:
+            return f"Ocurrió un error al procesar tu solicitud: {primera_linea}"
+
+    return "Ocurrió un error inesperado al procesar tu solicitud. Por favor, intenta nuevamente."
+

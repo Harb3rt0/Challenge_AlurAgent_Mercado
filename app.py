@@ -7,11 +7,11 @@ from langchain_core.messages import HumanMessage, AIMessage
 import importlib
 from src.agent.tools import construir_herramientas
 try:
-    from src.agent.agent_core import crear_agente_maestro, extraer_texto_respuesta
+    from src.agent.agent_core import crear_agente_maestro, extraer_texto_respuesta, formatear_mensaje_error
 except ImportError:
     import src.agent.agent_core as agent_core_mod
     importlib.reload(agent_core_mod)
-    from src.agent.agent_core import crear_agente_maestro, extraer_texto_respuesta
+    from src.agent.agent_core import crear_agente_maestro, extraer_texto_respuesta, formatear_mensaje_error
 
 dir = [
     "data/documents",
@@ -106,4 +106,4 @@ if pregunta_usuario:
                 st.session_state.mensajes_chat.append(AIMessage(content=texto_respuesta))
                 
             except Exception as e:
-                st.error(f"Ocurrió un error al procesar tu solicitud: {e}")
+                st.error(formatear_mensaje_error(e))
