@@ -2,13 +2,7 @@ import os
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from src.agent.tools import construir_herramientas
-from src.agent.agent_core import crear_agente_maestro
-
-# load_dotenv()
-
-# GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
-# if not GEMINI_API_KEY:
-#     raise ValueError("No se definió la clave API de Gemini")
+from src.agent.agent_core import crear_agente_maestro, extraer_texto_respuesta
 
 load_dotenv()
 
@@ -32,7 +26,8 @@ def ejecutar_sistema():
         
         print("[Agente pensando...]")
         respuesta = agente_final.invoke({"input": pregunta})
-        print(f"\n[Agente]: {respuesta['output']}")
+        texto_limpio = extraer_texto_respuesta(respuesta["output"])
+        print(f"\n[Agente]: {texto_limpio}")
 
 if __name__ == "__main__":
     ejecutar_sistema()

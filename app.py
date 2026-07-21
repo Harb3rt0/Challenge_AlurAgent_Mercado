@@ -5,7 +5,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmb
 from langchain_core.messages import HumanMessage, AIMessage
 
 from src.agent.tools import construir_herramientas
-from src.agent.agent_core import crear_agente_maestro
+from src.agent.agent_core import crear_agente_maestro, extraer_texto_respuesta
 
 dir = [
     "data/documents",
@@ -49,10 +49,6 @@ with st.sidebar:
     st.markdown("### Mercado Agent")
     st.caption("Asistente Virtual de Inteligencia Artificial")
     
-    # if st.button("Limpiar historial de chat", use_container_width=True):
-    #     st.session_state.mensajes_chat = []
-    #     st.rerun()
-
     archivos_cargados = []
     for directorio in dir:
         if os.path.exists(directorio):
@@ -97,7 +93,7 @@ if pregunta_usuario:
         with st.spinner("Buscando en la base de conocimiento..."):
             try:
                 respuesta_agente = agente_ejecutor.invoke({"input": pregunta_usuario})
-                texto_respuesta = respuesta_agente["output"]
+                texto_respuesta = extraer_texto_respuesta(respuesta_agente["output"])
                 
                 st.markdown(texto_respuesta)
                 

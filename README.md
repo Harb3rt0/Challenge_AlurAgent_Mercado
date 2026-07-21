@@ -62,6 +62,7 @@ flowchart TD
 3. Cerebro y Orquestación del Agente (Agent Core):
    - Definido en `src/agent/agent_core.py`, utiliza `create_tool_calling_agent` y `AgentExecutor` de LangChain.
    - Recibe la consulta del usuario y decide dinámicamente si debe ejecutar una búsqueda vectorial, una consulta de tabla o responder de forma directa.
+   - Implementa la función `extraer_texto_respuesta` para procesar y sanear la salida del LLM, descartando metadatos técnicos (como bloques JSON con atributos `extras` o `index`) y entregando únicamente la respuesta en texto plano conversacional.
    - Implementa una regla estricta de control de alucinaciones: si la información requerida no está presente en los documentos o la hoja de cálculo, el agente responde textualmente: "Lo siento, de momento no cuento con esa información en mi base de conocimiento."
 
 4. Capa de Presentación:

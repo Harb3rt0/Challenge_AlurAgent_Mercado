@@ -23,3 +23,21 @@ def crear_agente_maestro(llm, herramientas):
     agent = create_tool_calling_agent(llm, herramientas, prompt)
     
     return AgentExecutor(agent=agent, tools=herramientas, verbose=True)
+
+def extraer_texto_respuesta(salida):
+    if isinstance(salida, str):
+        return salida
+    if isinstance(salida, list):
+        partes = []
+        for item in salida:
+            if isinstance(item, dict) and "text" in item:
+                partes.append(item["text"])
+            elif isinstance(item, str):
+                partes.append(item)
+            elif hasattr(item, "text"):
+                partes.append(getattr(item, "text"))
+        if partes:
+            return "\n".join(partes)
+    if isinstance(salida, dict) and "text" in salida:
+        return salida["text"]
+    return str(salida)
