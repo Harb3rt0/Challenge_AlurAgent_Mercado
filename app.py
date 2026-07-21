@@ -34,11 +34,8 @@ st.markdown(
         [data-testid="stSidebarUserContent"] {
             display: flex;
             flex-direction: column;
+            justify-content: center;
             height: 100%;
-        }
-        [data-testid="stSidebarUserContent"] > div:last-child {
-            margin-top: auto;
-            padding-bottom: 1rem;
         }
     </style>
     """,
@@ -49,9 +46,9 @@ with st.sidebar:
     st.markdown("### Mercado Agent")
     st.caption("Asistente Virtual de Inteligencia Artificial")
     
-    if st.button("Limpiar historial de chat", use_container_width=True):
-        st.session_state.mensajes_chat = []
-        st.rerun()
+    # if st.button("Limpiar historial de chat", use_container_width=True):
+    #     st.session_state.mensajes_chat = []
+    #     st.rerun()
 
     archivos_cargados = []
     for directorio in dir:
@@ -67,8 +64,8 @@ with st.sidebar:
 
     st.markdown(
         f"""
-        <div class="sidebar-bottom">
-            <h4 style="font-size: 0.95rem; margin-bottom: 8px;">Archivos cargados:</h4>
+        <div>
+            <h4 style="font-size: 0.95rem; margin-top: 15px; margin-bottom: 8px;">Archivos cargados:</h4>
             <ul style="padding-left: 20px; margin: 0; font-size: 0.85rem; line-height: 1.5;">
                 {items_html if items_html else "<li style='color:#888;'>No se encontraron archivos.</li>"}
             </ul>
