@@ -4,8 +4,14 @@ from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from langchain_core.messages import HumanMessage, AIMessage
 
+import importlib
 from src.agent.tools import construir_herramientas
-from src.agent.agent_core import crear_agente_maestro, extraer_texto_respuesta
+try:
+    from src.agent.agent_core import crear_agente_maestro, extraer_texto_respuesta
+except ImportError:
+    import src.agent.agent_core as agent_core_mod
+    importlib.reload(agent_core_mod)
+    from src.agent.agent_core import crear_agente_maestro, extraer_texto_respuesta
 
 dir = [
     "data/documents",
