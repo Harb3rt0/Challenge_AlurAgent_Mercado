@@ -19,6 +19,9 @@ st.markdown("Consulta información sobre precios, productos y servicios.")
 @st.cache_resource
 def iniciar_sistema():
     load_dotenv()
+    if "GEMINI_API_KEY" not in os.environ and "GEMINI_API_KEY" in st.secrets:
+        os.environ["GEMINI_API_KEY"] = st.secrets["GEMINI_API_KEY"]
+
     llm = ChatGoogleGenerativeAI(model="gemini-3.5-flash", temperature=0.2)
     embeddings = GoogleGenerativeAIEmbeddings(model="models/gemini-embedding-001")
     
